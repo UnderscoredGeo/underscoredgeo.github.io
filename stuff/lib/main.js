@@ -7,7 +7,7 @@ if (hostnameArgs.length > 2) {
   };
   var str = "";
   for (i = 0; i < hostnameArgs.length; i++) {
-    if (i != hostnameArgs.length) {
+    if (i != hostnameArgs.length - 1) {
       str = str + hostnameArgs[i] + ".";
     } else {
       str = str + hostnameArgs[i];
