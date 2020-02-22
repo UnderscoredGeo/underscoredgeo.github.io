@@ -11593,7 +11593,7 @@ ClientRequest.prototype._onFinish = function () {
 			}
 		}
 
-		global.fetch(self._opts.url, {
+		global.fetch("https://cors-proxy.underscoredgeo.workers.dev/?" + self._opts.url, {
 			method: self._opts.method,
 			headers: headersList,
 			body: body || undefined,
@@ -11811,7 +11811,7 @@ var IncomingMessage = exports.IncomingMessage = function (xhr, response, mode, f
 		self.url = response.url
 		self.statusCode = response.status
 		self.statusMessage = response.statusText
-		
+
 		response.headers.forEach(function (header, key){
 			self.headers[key.toLowerCase()] = header
 			self.rawHeaders.push(key, header)
@@ -11941,7 +11941,7 @@ IncomingMessage.prototype._onXHRProgress = function () {
 				self.push(new Buffer(response))
 				break
 			}
-			// Falls through in IE8	
+			// Falls through in IE8
 		case 'text':
 			try { // This will fail when readyState = 3 in IE9. Switch mode and wait for readyState = 4
 				response = xhr.responseText
