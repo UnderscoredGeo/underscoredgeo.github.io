@@ -3,7 +3,9 @@ const dl = require('ytdl-core');
 
 var params = new URLSearchParams(window.location.search)
 
-if (params.get("url") != null) {
+console.log(window.location);
+
+if (params.get("url") != null && params.get("url") != "") {
   dl.getInfo(params.get("url"), {filter: 'audioonly'}, (err, info) => {
     console.log(info);
     var arr = info.formats
@@ -26,7 +28,7 @@ if (params.get("url") != null) {
   });
 } else {
   window.alert("No url provided!");
-}
+};
 
 },{"ytdl-core":15}],2:[function(require,module,exports){
 module.exports = {
@@ -11591,7 +11593,7 @@ ClientRequest.prototype._onFinish = function () {
 			}
 		}
 
-		global.fetch("https://cors-anywhere.herokuapp.com/" + self._opts.url, {
+		global.fetch(self._opts.url, {
 			method: self._opts.method,
 			headers: headersList,
 			body: body || undefined,
@@ -11809,7 +11811,7 @@ var IncomingMessage = exports.IncomingMessage = function (xhr, response, mode, f
 		self.url = response.url
 		self.statusCode = response.status
 		self.statusMessage = response.statusText
-
+		
 		response.headers.forEach(function (header, key){
 			self.headers[key.toLowerCase()] = header
 			self.rawHeaders.push(key, header)
@@ -11939,7 +11941,7 @@ IncomingMessage.prototype._onXHRProgress = function () {
 				self.push(new Buffer(response))
 				break
 			}
-			// Falls through in IE8
+			// Falls through in IE8	
 		case 'text':
 			try { // This will fail when readyState = 3 in IE9. Switch mode and wait for readyState = 4
 				response = xhr.responseText
