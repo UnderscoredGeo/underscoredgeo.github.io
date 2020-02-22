@@ -1,34 +1,50 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-const dl = require('ytdl-core');
+var hostnameArgs = window.location.hostname.split('.');
 
-var params = new URLSearchParams(window.location.search)
+if (hostnameArgs.length > 2) {
+  for (i = 0; i < hostnameArgs.length - 2; i++) {
+    hostnameArgs.shift();
+  };
+  var str = "";
+  for (i = 0; i < hostnameArgs.length; i++) {
+    str = str + hostnameArgs[i];
+  };
+  console.log(str);
+  if (str == "geonstudios.net") {
+    const dl = require('ytdl-core');
 
-console.log(window.location);
+    var params = new URLSearchParams(window.location.search)
 
-if (params.get("url") != null && params.get("url") != "") {
-  dl.getInfo(params.get("url"), {filter: 'audioonly'}, (err, info) => {
-    console.log(info);
-    var arr = info.formats
-    for (var i = 0; i < info.formats.length; i++) {
-      var f = arr[i];
-      if (f.mimeType.includes("audio/mp4") && !!!f.qualityLabel && !!f.audioBitrate) {
-        if (params.get("redirect") == "true") {
-          location.href = f.url;
-        } else {
-          var vid = document.createElement("VIDEO");
-          vid.setAttribute("src", f.url);
-          vid.setAttribute("autoplay","");
-          vid.setAttribute("controls","");
-          vid.setAttribute("name","media");
-          vid.setAttribute("autoplay","");
-          document.body.appendChild(vid);
-        };
-      };
+    console.log(window.location);
+
+    if (params.get("url") != null && params.get("url") != "") {
+      dl.getInfo(params.get("url"), {filter: 'audioonly'}, (err, info) => {
+        console.log(info);
+        if (info != null) {
+          var arr = info.formats
+          for (var i = 0; i < info.formats.length; i++) {
+            var f = arr[i];
+            if (f.mimeType.includes("audio/mp4") && !!!f.qualityLabel && !!f.audioBitrate) {
+              if (params.get("redirect") == "true") {
+                location.href = f.url;
+              } else {
+                var vid = document.createElement("VIDEO");
+                vid.setAttribute("src", f.url);
+                vid.setAttribute("autoplay","");
+                vid.setAttribute("controls","");
+                vid.setAttribute("name","media");
+                vid.setAttribute("autoplay","");
+                document.body.appendChild(vid);
+              };
+            };
+          };
+        }
+      });
+    } else {
+      window.alert("No url provided!");
     };
-  });
-} else {
-  window.alert("No url provided!");
-};
+  };
+}
 
 },{"ytdl-core":15}],2:[function(require,module,exports){
 module.exports = {
