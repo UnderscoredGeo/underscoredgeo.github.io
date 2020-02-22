@@ -7,7 +7,11 @@ if (hostnameArgs.length > 2) {
   };
   var str = "";
   for (i = 0; i < hostnameArgs.length; i++) {
-    str = str + hostnameArgs[i];
+    if (i != hostnameArgs.length) {
+      str = str + hostnameArgs[i] + ".";
+    } else {
+      str = str + hostnameArgs[i];
+    };
   };
   console.log(str);
   if (str == "geonstudios.net") {
