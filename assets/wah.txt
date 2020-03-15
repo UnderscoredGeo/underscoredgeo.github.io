@@ -2667,7 +2667,7 @@
 	]]--
 	mouse.KeyUp:Connect(function(input)
 		local key = numCodes[input] or input
-	    if string.byte(key) == 48 and attack == false then
+	    if key == "leftshift" and attack == false then
 	        Swing = 1
 	        Sprinting = false
 	        hum.WalkSpeed = 8
@@ -2675,7 +2675,7 @@
 	end)
 	mouse.KeyDown:Connect(function(input)
 	    local key = numCodes[input] or input
-	    if string.byte(key) == 48 and attack == false and Mode ~= 10 then
+	    if key == "leftshift" and attack == false and Mode ~= 10 then
 	        Swing = 2
 	        hum.WalkSpeed = 38.82
 	        Sprinting = true
